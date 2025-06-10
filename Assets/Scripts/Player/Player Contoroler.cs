@@ -29,7 +29,6 @@ public class PlayerContoler : MonoBehaviour
         if (IsGround)
         {
             Jump();
-            IsGround = false;
         }
 
     }
@@ -50,10 +49,11 @@ public class PlayerContoler : MonoBehaviour
         if (Input.GetButtonDown("Jump") && _rb != null)
         {
             _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
+            IsGround = false;
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
