@@ -6,7 +6,9 @@ public class PlayerContoler : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _jumpforce = 10f;
+    [SerializeField] private float _maxSpeed = 10f;
     private Rigidbody2D _rb;
+    bool IsGround = false;
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,14 +26,22 @@ public class PlayerContoler : MonoBehaviour
     void Update()
     {
         Move();
-        Jump();
+        if (IsGround)
+        {
+            Jump();
+            IsGround = false;
+        }
+
     }
     private void Move()
     {
         float move = Input.GetAxisRaw("Horizontal");
         if (_rb != null)
         {
-            _rb.AddForce(Vector2.right * move * _moveSpeed);
+            if (Mathf.Abs(_rb.velocity.x) < _maxSpeed)
+            {
+                _rb.AddForce(Vector2.right * move * _moveSpeed);
+            }
         }
     }
 
@@ -43,4 +53,12 @@ public class PlayerContoler : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            Debug.Log("’n–Ê‚É‚ ‚½‚Á‚Ä‚¢‚Ü‚·");
+            IsGround = true;
+        }
+    }
 }
