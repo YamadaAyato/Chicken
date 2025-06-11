@@ -436,7 +436,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7502350490731752901, guid: 99a62edf3e8916344a695b1568b7644a, type: 3}
       propertyPath: m_Name
-      value: Square
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7502350490731752901, guid: 99a62edf3e8916344a695b1568b7644a, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -497,11 +501,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7502350490731752901, guid: 99a62edf3e8916344a695b1568b7644a, type: 3}
       propertyPath: m_Name
-      value: Ground
+      value: Scaffold
       objectReference: {fileID: 0}
     - target: {fileID: 7502350490731752901, guid: 99a62edf3e8916344a695b1568b7644a, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Scaffold
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

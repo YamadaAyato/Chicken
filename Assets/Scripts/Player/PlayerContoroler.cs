@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerContoler : MonoBehaviour
 {
-    [SerializeField] GameObject _muzzle = default;
-    [SerializeField] GameObject _egg = default;
+    [SerializeField] GameObject _muzzle;
+    [SerializeField] GameObject _egg;
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _jumpforce = 10f;
     [SerializeField] private float _maxSpeed = 10f;
@@ -69,7 +69,7 @@ public class PlayerContoler : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        if (collision.gameObject.CompareTag("Scaffold"))
         {
             Debug.Log("’n–Ê‚É‚ ‚½‚Á‚Ä‚¢‚Ü‚·");
             IsGround = true;
