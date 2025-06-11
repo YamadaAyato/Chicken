@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class PlayerContoler : MonoBehaviour
 {
+    [SerializeField] GameObject _muzzle = default;
+    [SerializeField] GameObject _egg = default;
     [SerializeField] private float _moveSpeed = 10f;
     [SerializeField] private float _jumpforce = 10f;
     [SerializeField] private float _maxSpeed = 10f;
+    [SerializeField] private float _eggDropForce = 10f;
     private Rigidbody2D _rb;
     bool IsGround = false;
     // Start is called before the first frame update
@@ -30,7 +33,7 @@ public class PlayerContoler : MonoBehaviour
         {
             Jump();
         }
-
+        DropEgg();
     }
     private void Move()
     {
@@ -50,6 +53,17 @@ public class PlayerContoler : MonoBehaviour
         {
             _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
             IsGround = false;
+        }
+    }
+
+    private void DropEgg()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            GameObject egg = Instantiate(_egg,_muzzle.transform.position, Quaternion.identity);
+
+            Rigidbody2D eggRb = egg.GetComponent<Rigidbody2D>();
+            eggRb.AddForce(Vector2.down * _eggDropForce, ForceMode2D.Impulse);
         }
     }
 
