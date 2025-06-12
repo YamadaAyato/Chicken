@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5282470540242068222}
   - component: {fileID: 7095970820357951046}
   - component: {fileID: 4814412241290493722}
+  - component: {fileID: 7695073756425266110}
   m_Layer: 0
   m_Name: FriedEgg
-  m_TagString: Untagged
+  m_TagString: FriedEgg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +115,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.00000047683716, y: 0.02545762}
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.7217989, y: 0.95808077}
   m_EdgeRadius: 0
+--- !u!114 &7695073756425266110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7669598742216229044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992cebbe055aa7d419411b7fab5f46f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
