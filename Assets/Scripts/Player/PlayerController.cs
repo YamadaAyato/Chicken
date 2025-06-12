@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerContoler : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject _muzzle;
     [SerializeField] GameObject _egg;
@@ -10,8 +10,10 @@ public class PlayerContoler : MonoBehaviour
     [SerializeField] private float _jumpforce = 10f;
     [SerializeField] private float _maxSpeed = 10f;
     [SerializeField] private float _eggDropForce = 10f;
+    [SerializeField] private float _fireInterval = 2f;
     private Rigidbody2D _rb;
-    bool IsGround = false;
+    bool IsGrounded = false;
+    float _timer = 0f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -28,8 +30,9 @@ public class PlayerContoler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _timer += Time.deltaTime;
         Move();
-        if (IsGround)
+        if (IsGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -49,21 +52,22 @@ public class PlayerContoler : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && _rb != null)
+        if (_rb != null)
         {
             _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
-            IsGround = false;
+            IsGrounded = false;
         }
     }
 
     private void DropEgg()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && _timer > _fireInterval)
         {
             GameObject egg = Instantiate(_egg,_muzzle.transform.position, Quaternion.identity);
 
             Rigidbody2D eggRb = egg.GetComponent<Rigidbody2D>();
             eggRb.AddForce(Vector2.down * _eggDropForce, ForceMode2D.Impulse);
+            _timer = 0f;
         }
     }
 
@@ -72,7 +76,7 @@ public class PlayerContoler : MonoBehaviour
         if (collision.gameObject.CompareTag("Scaffold"))
         {
             Debug.Log("’n–Ê‚É‚ ‚½‚Á‚Ä‚¢‚Ü‚·");
-            IsGround = true;
+            IsGrounded = true;
         }
     }
 }

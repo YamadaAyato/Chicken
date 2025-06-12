@@ -314,6 +314,7 @@ MonoBehaviour:
   _jumpforce: 10
   _maxSpeed: 10
   _eggDropForce: 10
+  _fireInterval: 1
 --- !u!212 &1190140152
 SpriteRenderer:
   m_ObjectHideFlags: 0
