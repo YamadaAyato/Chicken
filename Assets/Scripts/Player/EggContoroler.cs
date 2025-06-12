@@ -14,7 +14,7 @@ public class Egg : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -22,7 +22,15 @@ public class Egg : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            Instantiate(_friedEggPrefab,transform.position,Quaternion.identity);
+            Instantiate(_friedEggPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Enemy _enemy =collision.GetComponent<Enemy>();
+            Debug.Log(_enemy);
+            _enemy.TakeDamage(1);
             Destroy(gameObject);
         }
     }
