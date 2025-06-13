@@ -486,7 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _muzzle: {fileID: 1943406669}
   _egg: {fileID: 209127735336115889, guid: cd82aaf6c0af1d1469ea4ec1e1e9efb0, type: 3}
-  _moveSpeed: 5
+  _moveSpeed: 9
   _jumpforce: 10
   _maxSpeed: 10
   _eggDropForce: 10
