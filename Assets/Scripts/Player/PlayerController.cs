@@ -6,9 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameObject _muzzle;
     [SerializeField] GameObject _egg;
+
+    [Header("移動設定")]
     [SerializeField] private float _moveSpeed = 10f;　//移動速度
     [SerializeField] private float _jumpforce = 10f;　//ジャンプ力
     [SerializeField] private float _maxSpeed = 50f;　//速度上限
+
+    [Header("卵設定")]
     [SerializeField] private float _eggDropForce = 10f; //卵を落とす力
     [SerializeField] private float _fireInterval = 2f;　//卵を落とす間隔
     private Rigidbody2D _rb;

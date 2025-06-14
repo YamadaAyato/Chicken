@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [Header("鈍足設定")]
     [SerializeField] private float _slowMultiplier = 0.5f;  // 速度を何倍にするか
     [SerializeField] private float _slowDuration = 1f;      // 鈍足時間（秒）
+
     private bool _isSlowed = false;
 
     Rigidbody2D _rb;
@@ -63,6 +64,7 @@ public class Enemy : MonoBehaviour
 
     public void ApplySlow()
     {
+        //_isSlowedが実行されているなら実行しない
         if (_isSlowed) return;
         StartCoroutine(Slow());
     }
@@ -70,10 +72,11 @@ public class Enemy : MonoBehaviour
     private IEnumerator Slow()
     {
         _isSlowed = true;
+        //移動速度に遅くする倍率をかける
         _moveForce = _baseMoveForce * _slowMultiplier;
 
         yield return new WaitForSeconds(_slowDuration);
-
+        //移動速度を戻す
         _moveForce = _baseMoveForce;
         _isSlowed = false;
     }
