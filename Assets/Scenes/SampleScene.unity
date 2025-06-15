@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 3
-  _moveForce: 9.58
+  _moveForce: 5
   _maxSpeed: 20
   _slowMultiplier: 0.5
   _slowDuration: 2
