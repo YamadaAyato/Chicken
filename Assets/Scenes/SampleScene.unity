@@ -358,10 +358,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7c6a0d31e50f04d95c9560ef30edfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0
-  _waveSpeed: 0
-  _waveHeight: 0
-  _stunDuration: 0
+  _moveSpeed: 3
+  _waveSpeed: 2
+  _waveHeight: 1
+  direction: {x: 1, y: 0, z: 0}
+  _stunDuration: 2
 --- !u!212 &476669249
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -423,7 +424,7 @@ Transform:
   m_GameObject: {fileID: 476669246}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.61, y: 6.58, z: 0}
+  m_LocalPosition: {x: -11.98, y: 6.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -883,6 +884,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c206fc2ff8a36634580d44a66cc9894d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IsStunned: 0
+  _stuntimer: 0
 --- !u!1001 &1714974282
 PrefabInstance:
   m_ObjectHideFlags: 0

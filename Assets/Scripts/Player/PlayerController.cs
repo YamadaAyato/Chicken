@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [Header("卵設定")]
     [SerializeField] private float _eggDropForce = 10f; //卵を落とす力
     [SerializeField] private float _fireInterval = 2f;　//卵を落とす間隔
+
+    private bool _IsStunned;  //スタンしているか
+    private float _stuntimer;  //スタン用の時間
     private Rigidbody2D _rb;
     bool IsGrounded = false;
     float _timer = 0f;
@@ -33,6 +36,18 @@ public class PlayerController : MonoBehaviour
         //時間計測
         _timer += Time.deltaTime;
 
+        if (_IsStunned)
+        {
+            _stuntimer -= Time.deltaTime;
+            if (_stuntimer <= 0)
+            {
+                _IsStunned = false;
+                Debug.Log("スタン解除");
+            }
+
+            return; // スタン中は操作不可
+        }
+
         Move();
 
         //IsGroundedがtrueの時とshiftが押されたときジャンプメソッドを実行
@@ -40,6 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump();
         }
+
         DropEgg();
     }
     private void Move()
@@ -88,5 +104,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("地面にあたっています");
             IsGrounded = true;
         }
+    }
+    public void Stun(float _duration)
+    {
+        _IsStunned = true;
+        _stuntimer = _duration;
+        Debug.Log($"スタン中{_duration}秒");
     }
 }
