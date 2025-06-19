@@ -8,6 +8,7 @@ TagManager:
   - Scaffold
   - Enemy
   - FriedEgg
+  - EnemyDestroy
   layers:
   - Default
   - TransparentFX
