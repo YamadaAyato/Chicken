@@ -1,25 +1,18 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Egg : MonoBehaviour
 {
-    [SerializeField] GameObject _friedEggPrefab;
-    // Start is called before the first frame update
+    [SerializeField] GameObject _friedEggPrefab;  //目玉焼きのプレハブ
+
     void Start()
     {
         Rigidbody2D _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-
     private void OnTriggerEnter2D(Collider2D collision)
-    {
+    {       
         if (collision.gameObject.CompareTag("Ground"))
         {
             Instantiate(_friedEggPrefab, transform.position, Quaternion.identity);

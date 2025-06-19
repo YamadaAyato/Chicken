@@ -1,32 +1,32 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("HPİ’è")]
-    [SerializeField] private int _maxHp = 3;@//HPİ’è
+    [Header("HPè¨­å®š")]
+    [SerializeField] private int _maxHp = 3;ã€€//HPè¨­å®š
     private int _currentHp;
 
-    [Header("‘¬“xİ’è")]
-    [SerializeField] private float _baseSpeed = 10f;@//ˆÚ“®‘¬“x
-    [SerializeField] private float _maxSpeed = 50f;@//‘¬“x§ŒÀ
+    [Header("é€Ÿåº¦è¨­å®š")]
+    [SerializeField] private float _baseSpeed = 10f;ã€€//ç§»å‹•é€Ÿåº¦
+    [SerializeField] private float _maxSpeed = 50f;ã€€//é€Ÿåº¦åˆ¶é™
     private float _currentSpeed;
 
-    [Header("ƒWƒƒƒ“ƒvİ’è")]
-    [SerializeField] private float _jumpForce = 10f;             // ƒWƒƒƒ“ƒv—Í
-    [SerializeField] private float _jumpHorizontalSpeed = 5f;    // ¶•ûŒü‚Ö‚ÌƒWƒƒƒ“ƒv‘¬“x
+    [Header("ã‚¸ãƒ£ãƒ³ãƒ—è¨­å®š")]
+    [SerializeField] private float _jumpForce = 10f;             // ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
+    [SerializeField] private float _jumpHorizontalSpeed = 5f;    // å·¦æ–¹å‘ã¸ã®ã‚¸ãƒ£ãƒ³ãƒ—é€Ÿåº¦
 
-    [Header("“İ‘«İ’è")]
-    [SerializeField] private float _slowMultiplier = 0.5f;  // ‘¬“x‚ğ‰½”{‚É‚·‚é‚©
-    [SerializeField] private float _slowDuration = 1f;      // “İ‘«ŠÔi•bj
+    [Header("éˆè¶³è¨­å®š")]
+    [SerializeField] private float _slowMultiplier = 0.5f;  // é€Ÿåº¦ã‚’ä½•å€ã«ã™ã‚‹ã‹
+    [SerializeField] private float _slowDuration = 1f;      // éˆè¶³æ™‚é–“ï¼ˆç§’ï¼‰
 
-    [Header("“G•Êİ’è")]
-    [SerializeField] private bool _move;@//‰¡ˆÚ“®
-    [SerializeField] private bool _jump;@//ƒWƒƒƒ“ƒvˆÚ“®
+    [Header("æ•µåˆ¥è¨­å®š")]
+    [SerializeField] private bool _move;ã€€//æ¨ªç§»å‹•
+    [SerializeField] private bool _jump;ã€€//ã‚¸ãƒ£ãƒ³ãƒ—ç§»å‹•
 
-    private bool _isSlowed = false;@@//ƒXƒ[ó‘Ô‚Ì”»’è
-    private bool _isGrounded = false;@//Ú’n”»’è
+    private bool _isSlowed = false;ã€€ã€€//ã‚¹ãƒ­ãƒ¼çŠ¶æ…‹ã®åˆ¤å®š
+    private bool _isGrounded = false;ã€€//æ¥åœ°åˆ¤å®š
 
     Rigidbody2D _rb;
 
@@ -53,18 +53,18 @@ public class Enemy : MonoBehaviour
 
     private void EnemyMove()
     {
-        // ¶•ûŒü‚Éˆê’è‘¬“x‚ÅˆÚ“®i‘¬“x§ŒÀ‚ ‚èj
-        //Mathf.Clamp(§ŒÀ‚µ‚½‚¢’l, Å¬’l, Å‘å’l)
+        // å·¦æ–¹å‘ã«ä¸€å®šé€Ÿåº¦ã§ç§»å‹•ï¼ˆé€Ÿåº¦åˆ¶é™ã‚ã‚Šï¼‰
+        //Mathf.Clamp(åˆ¶é™ã—ãŸã„å€¤, æœ€å°å€¤, æœ€å¤§å€¤)
         float clampedSpeed = Mathf.Clamp(-_currentSpeed, -_maxSpeed, _maxSpeed);
-        //_rb.velocity.y ‚Å y•ûŒü‚Ì‘¬“xiƒWƒƒƒ“ƒvE—‰º‚È‚Çj‚ğ•Û
+        //_rb.velocity.y ã§ yæ–¹å‘ã®é€Ÿåº¦ï¼ˆã‚¸ãƒ£ãƒ³ãƒ—ãƒ»è½ä¸‹ãªã©ï¼‰ã‚’ä¿æŒ
         _rb.velocity = new Vector2(clampedSpeed, _rb.velocity.y);
     }
 
     private void EnemyJump()
     {
-        // ¶Î‚ßã‚ÉƒWƒƒƒ“ƒv
+        // å·¦æ–œã‚ä¸Šã«ã‚¸ãƒ£ãƒ³ãƒ—
         _rb.velocity = new Vector2(-_jumpHorizontalSpeed, _jumpForce);
-        _isGrounded = false; // ‹ó’†‚É‚¢‚éó‘Ô‚É–ß‚·
+        _isGrounded = false; // ç©ºä¸­ã«ã„ã‚‹çŠ¶æ…‹ã«æˆ»ã™
     }
 
     public void TakeDamage(int damage)
@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
 
     public void ApplySlow()
     {
-        //_isSlowed‚ªÀs‚³‚ê‚Ä‚¢‚é‚È‚çÀs‚µ‚È‚¢
+        //_isSlowedãŒå®Ÿè¡Œã•ã‚Œã¦ã„ã‚‹ãªã‚‰å®Ÿè¡Œã—ãªã„
         if (_isSlowed) return;
         StartCoroutine(Slow());
     }
@@ -91,11 +91,11 @@ public class Enemy : MonoBehaviour
     private IEnumerator Slow()
     {
         _isSlowed = true;
-        //ˆÚ“®‘¬“x‚É’x‚­‚·‚é”{—¦‚ğ‚©‚¯‚é
+        //ç§»å‹•é€Ÿåº¦ã«é…ãã™ã‚‹å€ç‡ã‚’ã‹ã‘ã‚‹
         _currentSpeed = _baseSpeed * _slowMultiplier;
-        //ŠÔŒo‰ßŒãA‰º‚Ìˆ—‚ğÀs
+        //æ™‚é–“çµŒéå¾Œã€ä¸‹ã®å‡¦ç†ã‚’å®Ÿè¡Œ
         yield return new WaitForSeconds(_slowDuration);
-        //ˆÚ“®‘¬“x‚ğ–ß‚·
+        //ç§»å‹•é€Ÿåº¦ã‚’æˆ»ã™
         _currentSpeed = _baseSpeed; ;
         _isSlowed = false;
     }

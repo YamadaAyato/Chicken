@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,17 +7,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject _muzzle;
     [SerializeField] GameObject _egg;
 
-    [Header("ˆÚ“®İ’è")]
-    [SerializeField] private float _moveSpeed = 10f;@//ˆÚ“®‘¬“x
-    [SerializeField] private float _jumpforce = 10f;@//ƒWƒƒƒ“ƒv—Í
-    [SerializeField] private float _maxSpeed = 50f;@//‘¬“xãŒÀ
+    [Header("ç§»å‹•è¨­å®š")]
+    [SerializeField] private float _moveSpeed = 10f;ã€€//ç§»å‹•é€Ÿåº¦
+    [SerializeField] private float _jumpforce = 10f;ã€€//ã‚¸ãƒ£ãƒ³ãƒ—åŠ›
+    [SerializeField] private float _maxSpeed = 50f;ã€€//é€Ÿåº¦ä¸Šé™
 
-    [Header("—‘İ’è")]
-    [SerializeField] private float _eggDropForce = 10f; //—‘‚ğ—‚Æ‚·—Í
-    [SerializeField] private float _fireInterval = 2f;@//—‘‚ğ—‚Æ‚·ŠÔŠu
+    [Header("åµè¨­å®š")]
+    [SerializeField] private float _eggDropForce = 10f; //åµã‚’è½ã¨ã™åŠ›
+    [SerializeField] private float _fireInterval = 2f;ã€€//åµã‚’è½ã¨ã™é–“éš”
 
-    private bool _IsStunned;  //ƒXƒ^ƒ“‚µ‚Ä‚¢‚é‚©
-    private float _stuntimer;  //ƒXƒ^ƒ“—p‚ÌŠÔ
+    private bool _IsStunned;  //ã‚¹ã‚¿ãƒ³ã—ã¦ã„ã‚‹ã‹
+    private float _stuntimer;  //ã‚¹ã‚¿ãƒ³ç”¨ã®æ™‚é–“
     private Rigidbody2D _rb;
     bool IsGrounded = false;
     float _timer = 0f;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ŠÔŒv‘ª
+        //æ™‚é–“è¨ˆæ¸¬
         _timer += Time.deltaTime;
 
         if (_IsStunned)
@@ -42,15 +42,15 @@ public class PlayerController : MonoBehaviour
             if (_stuntimer <= 0)
             {
                 _IsStunned = false;
-                Debug.Log("ƒXƒ^ƒ“‰ğœ");
+                Debug.Log("ã‚¹ã‚¿ãƒ³è§£é™¤");
             }
 
-            return; // ƒXƒ^ƒ“’†‚Í‘€ì•s‰Â
+            return; // ã‚¹ã‚¿ãƒ³ä¸­ã¯æ“ä½œä¸å¯
         }
 
         Move();
 
-        //IsGrounded‚ªtrue‚Ì‚Æshift‚ª‰Ÿ‚³‚ê‚½‚Æ‚«ƒWƒƒƒ“ƒvƒƒ\ƒbƒh‚ğÀs
+        //IsGroundedãŒtrueã®æ™‚ã¨shiftãŒæŠ¼ã•ã‚ŒãŸã¨ãã‚¸ãƒ£ãƒ³ãƒ—ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œ
         if (IsGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         float move = Input.GetAxisRaw("Horizontal");
         if (_rb != null)
         {
-            //‘¬“x‚ª_maxSpeed‚Å‚È‚¯‚ê‚Î—Í‚ğ‰Á‚¦‚é
+            //é€Ÿåº¦ãŒ_maxSpeedã§ãªã‘ã‚Œã°åŠ›ã‚’åŠ ãˆã‚‹
             if (Mathf.Abs(_rb.velocity.x) < _maxSpeed)
             {
                 _rb.AddForce(Vector2.right * move * _moveSpeed);
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
         if (_rb != null)
         {
             _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
-            //İ’u”»’è‚Ì•Ï”‚ğfalse‚É
+            //è¨­ç½®åˆ¤å®šã®å¤‰æ•°ã‚’falseã«
             IsGrounded = false;
         }
     }
@@ -85,23 +85,23 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && _timer > _fireInterval)
         {
-            //ƒ}ƒYƒ‹‚ÌˆÊ’u‚©‚ç—‘‚ğ¶¬
+            //ãƒã‚ºãƒ«ã®ä½ç½®ã‹ã‚‰åµã‚’ç”Ÿæˆ
             GameObject egg = Instantiate(_egg,_muzzle.transform.position, Quaternion.identity);
 
             Rigidbody2D eggRb = egg.GetComponent<Rigidbody2D>();
-            //—‘‚É—‚¿‚é—Í‚ğ‰Á‚¦‚é
+            //åµã«è½ã¡ã‚‹åŠ›ã‚’åŠ ãˆã‚‹
             eggRb.AddForce(Vector2.down * _eggDropForce, ForceMode2D.Impulse);
-            //ŠÔŒv‘ª‚ğƒŠƒZƒbƒg
+            //æ™‚é–“è¨ˆæ¸¬ã‚’ãƒªã‚»ãƒƒãƒˆ
             _timer = 0f;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //‘«ê‚ÆÚG‚µ‚Ä‚¢‚é‚Æ‚«AÚ’n”»’è‚Ì•Ï”‚ğtrue‚É
+        //è¶³å ´ã¨æ¥è§¦ã—ã¦ã„ã‚‹ã¨ãã€æ¥åœ°åˆ¤å®šã®å¤‰æ•°ã‚’trueã«
         if (collision.gameObject.CompareTag("Scaffold"))
         {
-            Debug.Log("’n–Ê‚É‚ ‚½‚Á‚Ä‚¢‚Ü‚·");
+            Debug.Log("åœ°é¢ã«ã‚ãŸã£ã¦ã„ã¾ã™");
             IsGrounded = true;
         }
     }
@@ -109,6 +109,6 @@ public class PlayerController : MonoBehaviour
     {
         _IsStunned = true;
         _stuntimer = _duration;
-        Debug.Log($"ƒXƒ^ƒ“’†{_duration}•b");
+        Debug.Log($"ã‚¹ã‚¿ãƒ³ä¸­{_duration}ç§’");
     }
 }

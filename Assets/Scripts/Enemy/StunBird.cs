@@ -1,59 +1,70 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class StunBird : MonoBehaviour
 {
-    [Header("ˆÚ“®İ’è")]
-    [SerializeField] private float _moveSpeed = 5f;  //‘OiƒXƒs[ƒh
-    [SerializeField] private float _waveSpeed = 2f;  //”g‚Ì‘¬‚³
-    [SerializeField] private float _waveHeight = 1f;  //”g‚Ì‚‚³ 
-    public Vector3 direction = Vector3.right; // ˆÚ“®•ûŒüi‰E‚Éi‚Şj
+    [Header("ç§»å‹•è¨­å®š")]
+    [SerializeField] private float _moveSpeed = 5f;  //å‰é€²ã‚¹ãƒ”ãƒ¼ãƒ‰
+    [SerializeField] private float _waveSpeed = 2f;  //æ³¢ã®é€Ÿã•
+    [SerializeField] private float _waveHeight = 1f;  //æ³¢ã®é«˜ã• 
+    public Vector3 direction = Vector3.right; // ç§»å‹•æ–¹å‘ï¼ˆå³ã«é€²ã‚€ï¼‰
 
-    [Header("ƒXƒ^ƒ“İ’è")]
-    [SerializeField] private float _stunDuration;  //ƒvƒŒƒCƒ„[‚ÌƒXƒ^ƒ“ŠÔ
+    [Header("ã‚¹ã‚¿ãƒ³è¨­å®š")]
+    [SerializeField] private float _stunDuration;  //ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚¹ã‚¿ãƒ³æ™‚é–“
 
-    private Vector2 _startPosition;  //‰ŠúˆÊ’u
-    private float _waveOffset;  //”g‚ÌŠJnˆÊ‘Š
+    private Vector2 _startPosition;  //åˆæœŸä½ç½®
+    private float _waveOffset;  //æ³¢ã®é–‹å§‹ä½ç›¸
 
 
     // Start is called before the first frame update
     void Start()
     {
-        //‰ŠúˆÊ’u‚ğ‹L˜^
+        //åˆæœŸä½ç½®ã‚’è¨˜éŒ²
        _startPosition = transform.position;
-        // ƒTƒCƒ“”g‚ÌƒXƒ^[ƒgˆÊ’u‚ğƒ‰ƒ“ƒ_ƒ€‰»
+        // ã‚µã‚¤ãƒ³æ³¢ã®ã‚¹ã‚¿ãƒ¼ãƒˆä½ç½®ã‚’ãƒ©ãƒ³ãƒ€ãƒ åŒ–
         _waveOffset = Random.Range(0f, Mathf.PI * 2f);
-        // •ûŒüƒxƒNƒgƒ‹‚ğ³‹K‰»iˆÀ‘S‚Ì‚½‚ßj
+        // æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ­£è¦åŒ–ï¼ˆå®‰å…¨ã®ãŸã‚ï¼‰
         direction.Normalize();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //‰E‚Ö‚Ì’¼iˆÚ“®
-        //ƒtƒŒ[ƒ€ƒŒ[ƒg‚ÉˆË‘¶‚µ‚È‚¢“®‚«‚ğÀŒ»‚·‚é‚½‚ß‚ÉŠÔ‚ğ‚©‚¯‚é
+        //å³ã¸ã®ç›´é€²ç§»å‹•
+        //ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¬ãƒ¼ãƒˆã«ä¾å­˜ã—ãªã„å‹•ãã‚’å®Ÿç¾ã™ã‚‹ãŸã‚ã«æ™‚é–“ã‚’ã‹ã‘ã‚‹
         Vector3 forwardMove = new Vector3(direction.x, direction.y, 0f) * _moveSpeed * Time.deltaTime;
         
-        // ƒTƒCƒ“”g‚Åã‰º‚É—h‚ê‚é‚æ‚¤‚ÉYÀ•W‚ğ‰ÁZ
+        // ã‚µã‚¤ãƒ³æ³¢ã§ä¸Šä¸‹ã«æºã‚Œã‚‹ã‚ˆã†ã«Yåº§æ¨™ã‚’åŠ ç®—
         float wave = Mathf.Sin(Time.time * _waveSpeed + _waveOffset) *_waveHeight;
         
-        // ã‰ºˆÚ“®•ª‚ğTime.deltaTime‚ÅŠŠ‚ç‚©‚É•â³
+        // ä¸Šä¸‹ç§»å‹•åˆ†ã‚’Time.deltaTimeã§æ»‘ã‚‰ã‹ã«è£œæ­£
         Vector3 waveOffsetY = new Vector3(0f, wave, 0f) * Time.deltaTime;
        
-        // ‡¬‚µ‚ÄˆÚ“®
+        // åˆæˆã—ã¦ç§»å‹•
         transform.position += forwardMove + waveOffsetY;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+ 
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
             var stunnable = collision.gameObject.GetComponent<PlayerController>();
-            stunnable.Stun(_stunDuration); // w’è•b”‚¾‚¯ƒXƒ^ƒ“‚³‚¹‚é
+            stunnable.Stun(_stunDuration); // æŒ‡å®šç§’æ•°ã ã‘ã‚¹ã‚¿ãƒ³ã•ã›ã‚‹
 
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("EnemyDestroy"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
