@@ -174,9 +174,10 @@ MonoBehaviour:
   _maxHp: 3
   _baseSpeed: 10
   _maxSpeed: 20
-  _jumpForce: 10
+  _jumpForce: 5
   _jumpHorizontalSpeed: 5
   _slowMultiplier: 0.5
   _slowDuration: 2
   _move: 0
   _jump: 1
+  _scoreValue: 0

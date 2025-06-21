@@ -5,15 +5,14 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance;
+    public static ScoreManager Instance { get; private set; }
 
     [Header("UIの参照")]
     [SerializeField] private Text _scoreText;
 
-    private int _score =0;
+    private int _score = 0;
 
 
-    // Start is called before the first frame update
     void Awake()
     {
         //一つだけ存在させる処理
@@ -29,7 +28,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        _score += amount;
+        _score += amount;  //Enemy側から加算
         Debug.Log("スコア加算");
         UpdateScoreText();
     }
