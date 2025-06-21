@@ -34,16 +34,16 @@ public class StunBird : MonoBehaviour
     {
         //右への直進移動
         //フレームレートに依存しない動きを実現するために時間をかける
-        Vector3 forwardMove = new Vector3(direction.x, direction.y, 0f) * _moveSpeed * Time.deltaTime;
+        Vector3 _forwardMove = new Vector3(direction.x, direction.y, 0f) * _moveSpeed * Time.deltaTime;
         
         // サイン波で上下に揺れるようにY座標を加算
-        float wave = Mathf.Sin(Time.time * _waveSpeed + _waveOffset) *_waveHeight;
+        float _wave = Mathf.Sin(Time.time * _waveSpeed + _waveOffset) *_waveHeight;
         
         // 上下移動分をTime.deltaTimeで滑らかに補正
-        Vector3 waveOffsetY = new Vector3(0f, wave, 0f) * Time.deltaTime;
+        Vector3 _waveOffsetY = new Vector3(0f, _wave, 0f) * Time.deltaTime;
        
         // 合成して移動
-        transform.position += forwardMove + waveOffsetY;
+        transform.position += _forwardMove + _waveOffsetY;
     }
 
  

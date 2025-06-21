@@ -8,14 +8,14 @@ public class FriedEggSlowZone : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject,_lifeTime);
+        Destroy(gameObject,_lifeTime);  //_lifeTimeたったら消す
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            enemy.ApplySlow();
+            Enemy enemy = collision.GetComponent<Enemy>();  //相手のEnemyスクリプトをGetComponent
+            enemy.ApplySlow();  //呼び出す
         }
     }
 }
