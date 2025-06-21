@@ -47,17 +47,21 @@ public class PlayerController : MonoBehaviour
 
             return; // スタン中は操作不可
         }
-
         Move();
+
+        DropEgg();
 
         //IsGroundedがtrueの時とshiftが押されたときジャンプメソッドを実行
         if (IsGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
         }
-
-        DropEgg();
     }
+
+    private void FixedUpdate()
+    {
+    }
+
     private void Move()
     {
         float move = Input.GetAxisRaw("Horizontal");

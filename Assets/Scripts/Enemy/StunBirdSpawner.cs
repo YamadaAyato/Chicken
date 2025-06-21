@@ -24,7 +24,7 @@ public class NewBehaviourScript : MonoBehaviour
         _spawntimer -= Time.deltaTime;
 
         //スポーンタイマーが0以下の時
-        if (_spawntimer <= 0)
+        if (_spawntimer <= 0　&& _stunBirdPrefab)
         {
             Spawn();
             _spawntimer = Random.Range(_minInterval, _maxInterval);
