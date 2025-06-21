@@ -162,11 +162,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHp: 3
-  _baseSpeed: 10
-  _maxSpeed: 50
+  _baseSpeed: 5
+  _maxSpeed: 30
   _jumpForce: 10
   _jumpHorizontalSpeed: 5
   _slowMultiplier: 0.5
   _slowDuration: 1
   _move: 1
   _jump: 0
+  _scoreValue: 0

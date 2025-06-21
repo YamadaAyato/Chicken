@@ -25,6 +25,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _move;　//横移動
     [SerializeField] private bool _jump;　//ジャンプ移動
 
+    [Header("スコア設定")]
+    [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
+
     private bool _isSlowed = false;　　//スロー状態の判定
     private bool _isGrounded = false;　//接地判定
 
@@ -78,6 +81,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        ScoreManager.Instance.AddScore(_scoreValue);
         Destroy(gameObject);
     }
 
