@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool _IsStunned;  //スタンしているか
     private float _stuntimer;  //スタン用の時間
     private Rigidbody2D _rb;
-    bool IsGrounded = false;
+    bool _IsGrounded = false;
     float _timer = 0f;
     // Start is called before the first frame update
     void Awake()
@@ -44,12 +44,13 @@ public class PlayerController : MonoBehaviour
 
             return; // スタン中は操作不可
         }
+
         Move();
 
         DropEgg();
 
         //IsGroundedがtrueの時とshiftが押されたときジャンプメソッドを実行
-        if (IsGrounded && Input.GetButtonDown("Jump"))
+        if (_IsGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
         {
             _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
             //設置判定の変数をfalseに
-            IsGrounded = false;
+            _IsGrounded = false;
         }
     }
 
@@ -103,9 +104,10 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Scaffold"))
         {
             Debug.Log("地面にあたっています");
-            IsGrounded = true;
+            _IsGrounded = true;
         }
     }
+
     public void Stun(float _duration)
     {
         _IsStunned = true;

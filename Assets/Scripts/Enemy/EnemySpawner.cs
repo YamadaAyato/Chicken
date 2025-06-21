@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    #region PhaseClassDefinition
     // 各フェーズの設定クラス
     //[System.Serializable]は、ScriptableObject や MonoBehaviour の中で、複雑なデータ構造を扱いたいとき
     //リストや配列の要素として独自のクラスを表示したいとき。
-    [System.Serializable]  
+    [System.Serializable]
     public class Phase
     {
-        public GameObject[] _enemyPrefabs;    // このフェーズで出現する敵プレハブ
-        public GameObject _bossPrefab;        // このフェーズで出現させるボスのプレハブ（nullで出現なし）
-        public bool _spawnBoss = false;       // このフェーズでボスを出現させるか
-        public float _spawnInterval = 3f;     // 敵をスポーンする間隔
-        public int _minSpawnCount = 1;        // 一度に出す敵の最小数
-        public int _maxSpawnCount = 3;        // 一度に出す敵の最大数
+        public GameObject[] EnemyPrefabs;    // このフェーズで出現する敵プレハブ
+        public GameObject BossPrefab;        // このフェーズで出現させるボスのプレハブ（nullで出現なし）
+        public bool SpawnBoss = false;       // このフェーズでボスを出現させるか
+        public float SpawnInterval = 3f;     // 敵をスポーンする間隔
+        public int MinSpawnCount = 1;        // 一度に出す敵の最小数
+        public int MaxSpawnCount = 3;        // 一度に出す敵の最大数
     }
+    #endregion
 
-    public Phase[] _phases;                  // 各フェーズの設定リスト
-    public float _phaseDuration = 15f;       // 各フェーズの長さ
-    public Transform[] _spawnPoints;         // 敵の出現位置　
+    public Phase[] Phases;                  // 各フェーズの設定リスト
+    public float PhaseDuration = 15f;       // 各フェーズの長さ
+    public Transform[] SpawnPoints;         // 敵の出現位置　
 
     private int _currentPhaseIndex = 0;      // フェーズ番号
     private float _phaseTimer = 0f;          // フェーズの経過時間
@@ -32,7 +34,8 @@ public class EnemySpawner : MonoBehaviour
         _phaseTimer += Time.deltaTime;  //フェーズの経過時間
 
         // フェーズの持続時間を超えたら次のフェーズへ
-        if (_currentPhaseIndex < _phases.Length - 1 && _phaseTimer >= _phaseDuration)
+        if (_currentPhaseIndex < Phases.Length - 1
+            && _phaseTimer >= PhaseDuration)
         {
             _currentPhaseIndex++;
             _phaseTimer = 0f;
@@ -41,18 +44,20 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log($"フェーズ {_currentPhaseIndex + 1} に移行");
         }
 
-        Phase currentPhase = _phases[_currentPhaseIndex];
+        var currentPhase = Phases[_currentPhaseIndex];
 
         // ボスの出現処理
-        if (currentPhase._spawnBoss && !_bossSpawned && currentPhase._bossPrefab != null)
+        if (currentPhase.SpawnBoss 
+            && !_bossSpawned 
+            && currentPhase.BossPrefab != null)
         {
-            SpawnBoss(currentPhase._bossPrefab);
+            SpawnBoss(currentPhase.BossPrefab);
             _bossSpawned = true;
         }
 
         // 通常の敵の出現処理
         _spawnTimer += Time.deltaTime;
-        if (_spawnTimer >= currentPhase._spawnInterval)
+        if (_spawnTimer >= currentPhase.SpawnInterval)
         {
             SpawnEnemies(currentPhase);
             _spawnTimer = 0f;
@@ -66,16 +71,19 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemies(Phase phase)
     {
         // 敵またはスポーン地点が設定されていなければ出現させない
-        if (phase._enemyPrefabs.Length == 0 || _spawnPoints.Length == 0) return;
+        if (phase.EnemyPrefabs.Length == 0 || SpawnPoints.Length == 0)
+        {
+            return;
+        }
 
         // 出現数をランダムに決定（最小～最大）
-        int spawnCount = Random.Range(phase._minSpawnCount, phase._maxSpawnCount + 1);
+        int spawnCount = Random.Range(phase.MinSpawnCount, phase.MaxSpawnCount + 1);
 
         for (int i = 0; i < spawnCount; i++)
         {
             // 出現する敵と位置をランダムに選択
-            GameObject enemy = phase._enemyPrefabs[Random.Range(0, phase._enemyPrefabs.Length)];
-            Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+            GameObject enemy = phase.EnemyPrefabs[Random.Range(0, phase.EnemyPrefabs.Length)];
+            Transform spawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
 
             // 敵を出現
             Instantiate(enemy, spawnPoint.position, Quaternion.identity);
@@ -88,10 +96,10 @@ public class EnemySpawner : MonoBehaviour
     /// <param name="bossPrefab">出現させるボスのプレハブ</param>
     void SpawnBoss(GameObject bossPrefab)
     {
-        if (_spawnPoints.Length == 0) return;
+        if (SpawnPoints.Length == 0) return;
 
         // 出現位置をランダムに選択
-        Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        Transform spawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
 
         // ボスを出現させる
         Instantiate(bossPrefab, spawnPoint.position, Quaternion.identity);
