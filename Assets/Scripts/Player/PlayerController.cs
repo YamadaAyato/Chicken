@@ -56,10 +56,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-    }
-
+    /// <summary>
+    /// プレイヤーの水平移動の処理
+    /// </summary>
     private void Move()
     {
         float move = Input.GetAxisRaw("Horizontal");
@@ -73,6 +72,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーのジャンプの処理
+    /// </summary>
     private void Jump()
     {
         if (_rb != null)
@@ -83,6 +85,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 左クリックしたときに卵を落とす処理
+    /// </summary>
     private void DropEgg()
     {
         if (Input.GetButtonDown("Fire1") && _timer > _fireInterval)
@@ -108,6 +113,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// StunBirdで呼び出し、プレイヤーをスタンさせる
+    /// </summary>
+    /// <param name="_duration"></param>
     public void Stun(float _duration)
     {
         _IsStunned = true;
