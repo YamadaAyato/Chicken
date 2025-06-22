@@ -19,6 +19,7 @@ public class ScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;  // 自分自身を代入（最初の1個）
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {
@@ -27,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// スコアを加算する処理
     /// </summary>
     /// <param name="amount">Enemy側から代入する値</param>
     public void AddScore(int amount)
@@ -48,5 +49,4 @@ public class ScoreManager : MonoBehaviour
             Debug.Log($"スコア+{_score}");
         }
     }
-
 }
