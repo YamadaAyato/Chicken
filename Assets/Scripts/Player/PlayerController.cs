@@ -16,6 +16,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _eggDropForce = 10f; //卵を落とす力
     [SerializeField] private float _fireInterval = 2f;　//卵を落とす間隔
 
+    [Header("必殺技設定")]
+    [SerializeField] private float _maxSpecialGauge = 100f;
+    [SerializeField] private float _gaugePerEnemy = 20f;
+    [SerializeField] private float _specialRange = 5f; // 範囲
+    [SerializeField] private LayerMask _enemyLayer;
+
+    private float _currentSpecialGauge = 0f;
+
     private bool _IsStunned;  //スタンしているか
     private float _stuntimer;  //スタン用の時間
     private Rigidbody2D _rb;
@@ -47,12 +55,20 @@ public class PlayerController : MonoBehaviour
 
         Move();
 
-        DropEgg();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            DropEgg();
+        }
 
         //IsGroundedがtrueの時とshiftが押されたときジャンプメソッドを実行
         if (_IsGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
+        }
+
+        if (Input.GetButtonDown("Fire2") && _currentSpecialGauge >= _maxSpecialGauge)
+        {
+            UseSpecialSkill();
         }
     }
 
@@ -90,7 +106,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void DropEgg()
     {
-        if (Input.GetButtonDown("Fire1") && _timer > _fireInterval)
+        if (_timer > _fireInterval)
         {
             //マズルの位置から卵を生成
             GameObject egg = Instantiate(_egg,_muzzle.transform.position, Quaternion.identity);
@@ -101,6 +117,36 @@ public class PlayerController : MonoBehaviour
             //時間計測をリセット
             _timer = 0f;
         }
+    }
+
+    /// <summary>
+    /// 必殺技を使うときの処理
+    /// </summary>
+    private void UseSpecialSkill()
+    {
+        Debug.Log("ULT発動");
+
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _specialRange, _enemyLayer);
+        foreach (Collider2D _enemy in enemies)
+        {
+            Enemy enemy = _enemy.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(3); // 大ダメージ
+            }
+        }
+
+        _currentSpecialGauge = 0f;
+    }
+
+    /// <summary>
+    /// 必殺技のゲージをためる処理
+    /// </summary>
+    public void AddSpecialGauge()
+    {
+        _currentSpecialGauge += _gaugePerEnemy;
+        _currentSpecialGauge = Mathf.Min(_currentSpecialGauge, _maxSpecialGauge);
+        Debug.Log($"ゲージ増加: {_currentSpecialGauge}/{_maxSpecialGauge}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

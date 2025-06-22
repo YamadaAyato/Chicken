@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     [Header("スコア設定")]
     [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
 
+    [SerializeField] private PlayerController _player;
+
     private bool _isSlowed = false;　　//スロー状態の判定
     private bool _isGrounded = false;　//接地判定
 
@@ -96,6 +98,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
+        PlayerController _player =GetComponent<PlayerController>();
+        if (_player != null)
+        {
+            _player.AddSpecialGauge();  // プレイヤーのゲージを増やす
+        }
         ScoreManager.Instance.AddScore(_scoreValue);
         Destroy(gameObject);
     }
