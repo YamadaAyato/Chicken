@@ -18,7 +18,6 @@ public class StunBird : MonoBehaviour
     private float _waveOffset;  //波の開始位相
 
 
-    // Start is called before the first frame update
     void Start()
     {
         //初期位置を記録
@@ -46,7 +45,6 @@ public class StunBird : MonoBehaviour
         transform.position += _forwardMove + _waveOffsetY;
     }
 
- 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -66,5 +64,4 @@ public class StunBird : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }
