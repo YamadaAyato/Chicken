@@ -12,16 +12,17 @@ public class Egg : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {       
+    {
+        //地面に当たったら目玉焼きを生成し、卵を消す
         if (collision.gameObject.CompareTag("Ground"))
         {
             Instantiate(_friedEggPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
-
-        if (collision.gameObject.CompareTag("Enemy"))
+        //敵に当たったらダメージを与え、卵を消す
+        else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Enemy _enemy =collision.GetComponent<Enemy>();
+            Enemy _enemy = collision.GetComponent<Enemy>();
             Debug.Log(_enemy);
             _enemy.TakeDamage(1);
             Destroy(gameObject);

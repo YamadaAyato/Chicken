@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; }
+    public static ScoreManager Instance { get; private set; } //どこからでも呼べる
 
     [Header("UIの参照")]
-    [SerializeField] private Text _scoreText;
+    [SerializeField] private Text _scoreText; 
 
     private int _score = 0;
 
@@ -26,6 +26,10 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="amount">Enemy側から代入する値</param>
     public void AddScore(int amount)
     {
         _score += amount;  //Enemy側から加算
@@ -33,6 +37,9 @@ public class ScoreManager : MonoBehaviour
         UpdateScoreText();
     }
 
+    /// <summary>
+    /// スコアを更新して表示する処理
+    /// </summary>
     private void UpdateScoreText()
     {
         if (_scoreText != null)

@@ -17,9 +17,14 @@ public class Home : MonoBehaviour
         _homeCurrentHp = _homeMaxHp;
     }
 
+    /// <summary>
+    /// Enemy側で呼び出し家にダメージを与える
+    /// </summary>
+    /// <param name="damegeHome">Enemy側から代入</param>
     public void TakeDamegeHome(int damegeHome)
     {
         _homeCurrentHp -= damegeHome;
+        //HPが0以下になったらGameOver Sceneをロード
         if (_homeCurrentHp <= 0)
         {
             _homeCurrentHp = 0;

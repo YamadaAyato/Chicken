@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _move;　//横移動
     [SerializeField] private bool _jump;　//ジャンプ移動
     [SerializeField] private int _attackHomeDamage = 1;  //家への攻撃力
+    [SerializeField] private int _knockBackForce = 5;
 
     [Header("スコア設定")]
     [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
@@ -37,8 +38,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _currentHp = _maxHp;
-        _currentSpeed = _baseSpeed;
+        _currentHp = _maxHp;  //現在のHpにmaxHpを代入
+        _currentSpeed = _baseSpeed;  //現在のSpeedにmaxSpeedを代入
     }
 
     // Update is called once per frame
@@ -49,12 +50,15 @@ public class Enemy : MonoBehaviour
             EnemyMove();
         }
 
-        if (_jump && _isGrounded) 
+        if (_jump && _isGrounded)
         {
             EnemyJump();
         }
     }
 
+    /// <summary>
+    /// 敵の水平移動
+    /// </summary>
     private void EnemyMove()
     {
         // 左方向に一定速度で移動（速度制限あり）
@@ -64,6 +68,9 @@ public class Enemy : MonoBehaviour
         _rb.velocity = new Vector2(clampedSpeed, _rb.velocity.y);
     }
 
+    /// <summary>
+    /// 敵のジャンプ移動
+    /// </summary>
     private void EnemyJump()
     {
         // 左斜め上にジャンプ
@@ -71,6 +78,10 @@ public class Enemy : MonoBehaviour
         _isGrounded = false; // 空中にいる状態に戻す
     }
 
+    /// <summary>
+    /// ダメージを受ける処理
+    /// </summary>
+    /// <param name="damage">EggControlerから値を代入</param>
     public void TakeDamage(int damage)
     {
         _currentHp -= damage;
@@ -80,12 +91,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// HPが0になった時に呼び出される処理
+    /// </summary>
     private void Die()
     {
         ScoreManager.Instance.AddScore(_scoreValue);
         Destroy(gameObject);
     }
 
+    /// <summary>
+    /// FriedEggSlowZoneから呼び出されSlowメソッドを呼び出す
+    /// </summary>
     public void ApplySlow()
     {
         //_isSlowedが実行されているなら実行しない
@@ -93,6 +110,9 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Slow());
     }
 
+    /// <summary>
+    /// 敵を遅くする処理
+    /// </summary>
     private IEnumerator Slow()
     {
         _isSlowed = true;
@@ -101,7 +121,7 @@ public class Enemy : MonoBehaviour
         //時間経過後、下の処理を実行
         yield return new WaitForSeconds(_slowDuration);
         //移動速度を戻す
-        _currentSpeed = _baseSpeed; ;
+        _currentSpeed = _baseSpeed;
         _isSlowed = false;
     }
 
@@ -113,9 +133,27 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Home"))
         {
+            _move = false;
             Home _home = collision.gameObject.GetComponent<Home>();
-            _home.TakeDamegeHome(_attackHomeDamage);
-            Debug.Log($"家へ{_attackHomeDamage}ダメージ");
+            //Home.csから呼び出す
+            _home.TakeDamegeHome(_attackHomeDamage);  
+            Debug.Log($"家へ{_attackHomeDamage}ダメージ");  
+
+            //家に当たったら力を加えノックバックする
+            _rb.AddForce(Vector2.right * _knockBackForce, ForceMode2D.Impulse);
+
+            Invoke("ChangeMoveFlag", 3f);
+        }
+    }
+
+    /// <summary>
+    /// 3秒後に_moveをtrueに
+    /// </summary>
+    private void ChangeMoveFlag()
+    {
+        if (!_jump)
+        {
+            _move = true;
         }
     }
 }

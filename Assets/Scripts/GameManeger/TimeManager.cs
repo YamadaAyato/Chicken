@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class TimeManager : MonoBehaviour
 {
-    [SerializeField] public float _startTime = 0;
+    [SerializeField] public float _startTime = 90;
     [SerializeField] public float _currentTime;
     public Text timerText;
     // Start is called before the first frame update
@@ -28,9 +29,13 @@ public class TimeManager : MonoBehaviour
         {
             _currentTime = 0;
             UpdateTimerDisplay();
+            SceneManager.LoadScene("GameClear");
         }
     }
 
+    /// <summary>
+    /// 時間を更新して表示する処理
+    /// </summary>
     private void UpdateTimerDisplay()
     {
         //時間がマイナスになったときに0以下にしないための安全処理
