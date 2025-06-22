@@ -76,9 +76,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ea79b51b8dd528d4ebe460580798ca12, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -161,9 +161,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e5eb7e53ae65f4180cd77a09abcb3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 3
-  _baseSpeed: 4
-  _maxSpeed: 8
+  _maxHp: 2
+  _baseSpeed: 2
+  _maxSpeed: 4
   _jumpForce: 10
   _jumpHorizontalSpeed: 5
   _slowMultiplier: 0.5
@@ -171,5 +171,6 @@ MonoBehaviour:
   _move: 1
   _jump: 0
   _attackHomeDamage: 1
-  _knockBackForce: 10
-  _scoreValue: 0
+  _knockBackForce: 5
+  _scoreValue: 5
+  _player: {fileID: 0}
