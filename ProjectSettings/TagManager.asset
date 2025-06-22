@@ -9,11 +9,12 @@ TagManager:
   - Enemy
   - FriedEgg
   - EnemyDestroy
+  - Home
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 

@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     [Header("敵別設定")]
     [SerializeField] private bool _move;　//横移動
     [SerializeField] private bool _jump;　//ジャンプ移動
+    [SerializeField] private int _attackHomeDamage = 1;  //家への攻撃力
 
     [Header("スコア設定")]
     [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
@@ -109,6 +110,12 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _isGrounded = true;
+        }
+        else if (collision.gameObject.CompareTag("Home"))
+        {
+            Home _home = collision.gameObject.GetComponent<Home>();
+            _home.TakeDamegeHome(_attackHomeDamage);
+            Debug.Log($"家へ{_attackHomeDamage}ダメージ");
         }
     }
 }
