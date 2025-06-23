@@ -53,8 +53,6 @@ public class PlayerController : MonoBehaviour
             return; // スタン中は操作不可
         }
 
-        Move();
-
         if (Input.GetButtonDown("Fire1"))
         {
             DropEgg();
@@ -70,6 +68,23 @@ public class PlayerController : MonoBehaviour
         {
             UseSpecialSkill();
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_IsStunned)
+        {
+            _stuntimer -= Time.deltaTime;
+            if (_stuntimer <= 0)
+            {
+                _IsStunned = false;
+                Debug.Log("スタン解除");
+            }
+
+            return; // スタン中は操作不可
+        }
+
+        Move();
     }
 
     /// <summary>
