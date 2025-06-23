@@ -42,6 +42,10 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _currentHp = _maxHp;  //現在のHpにmaxHpを代入
         _currentSpeed = _baseSpeed;  //現在のSpeedにmaxSpeedを代入
+
+        Vector3 localScale = transform.localScale;
+        localScale.x = -Mathf.Abs(localScale.x); // 左向き
+        transform.localScale = localScale;
     }
 
     // Update is called once per frame
