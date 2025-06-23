@@ -10,7 +10,7 @@ public class ScoreManager : MonoBehaviour
     [Header("UI‚ÌQÆ")]
     [SerializeField] private Text _scoreText; 
 
-    private int _score = 0;
+    public int _score = 0;
 
 
     void Awake()
