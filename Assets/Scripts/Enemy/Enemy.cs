@@ -30,6 +30,8 @@ public class Enemy : MonoBehaviour
     [Header("スコア設定")]
     [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
 
+    [SerializeField] private PlayerController _player;
+
     private bool _isSlowed = false;　　//スロー状態の判定
     private bool _isGrounded = false;　//接地判定
 
@@ -40,6 +42,10 @@ public class Enemy : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
         _currentHp = _maxHp;  //現在のHpにmaxHpを代入
         _currentSpeed = _baseSpeed;  //現在のSpeedにmaxSpeedを代入
+
+        Vector3 localScale = transform.localScale;
+        localScale.x = -Mathf.Abs(localScale.x); // 左向き
+        transform.localScale = localScale;
     }
 
     // Update is called once per frame
@@ -96,6 +102,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Die()
     {
+        PlayerController _player =GetComponent<PlayerController>();
+        if (_player != null)
+        {
+            _player.AddSpecialGauge();  // プレイヤーのゲージを増やす
+        }
         ScoreManager.Instance.AddScore(_scoreValue);
         Destroy(gameObject);
     }
