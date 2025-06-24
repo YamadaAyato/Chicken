@@ -27,6 +27,14 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        //シーン開始時に探す
+        //設計的にはよくない
+        _scoreText = GameObject.Find("ScoreText")?.GetComponent<Text>();
+        UpdateScoreText();
+    }
+
     /// <summary>
     /// スコアを加算する処理
     /// </summary>
@@ -37,6 +45,7 @@ public class ScoreManager : MonoBehaviour
         Debug.Log("スコア加算");
         UpdateScoreText();
     }
+
 
     /// <summary>
     /// スコアを更新して表示する処理
