@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         if (_timer > _fireInterval)
         {
             //マズルの位置から卵を生成
-            GameObject egg = Instantiate(_egg,_muzzle.transform.position, Quaternion.identity);
+            GameObject egg = Instantiate(_egg, _muzzle.transform.position, Quaternion.identity);
 
             Rigidbody2D eggRb = egg.GetComponent<Rigidbody2D>();
             //卵に落ちる力を加える
@@ -132,6 +132,17 @@ public class PlayerController : MonoBehaviour
             //時間計測をリセット
             _timer = 0f;
         }
+    }
+
+    /// <summary>
+    /// StunBirdで呼び出し、プレイヤーをスタンさせる
+    /// </summary>
+    /// <param name="_duration"></param>
+    public void Stun(float _duration)
+    {
+        _IsStunned = true;
+        _stuntimer = _duration;
+        Debug.Log($"スタン中{_duration}秒");
     }
 
     /// <summary>
@@ -174,14 +185,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// StunBirdで呼び出し、プレイヤーをスタンさせる
-    /// </summary>
-    /// <param name="_duration"></param>
-    public void Stun(float _duration)
+    //安全用
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        _IsStunned = true;
-        _stuntimer = _duration;
-        Debug.Log($"スタン中{_duration}秒");
+        if (collision.gameObject.CompareTag("Scaffold"))
+        {
+            _IsGrounded = true;
+        }
+    }
+
+    private void OnEnable()
+    {
+        Enemy.OnAnyEnemyDied += AddSpecialGauge;
+    }
+
+    private void OnDisable()
+    {
+        Enemy.OnAnyEnemyDied -= AddSpecialGauge;
+    }
+
+    public float CurrentGaugeRatio
+    {
+        get { return _currentSpecialGauge / _maxSpecialGauge; }
     }
 }
