@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _specialClip;
     private AudioSource _audioSource;
 
+    [Header("アニメーション関連")]
+    [SerializeField] private Animator _specialEffectAnimator; //必殺技演出用のAnimator
 
     private bool _isStunned;  //スタンしているか
     private float _stunTimer;  //スタン用の時間
@@ -171,6 +173,11 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("ULT発動");
         _audioSource.PlayOneShot(_specialClip);
+
+        if (_specialEffectAnimator != null)
+        {
+            _specialEffectAnimator.SetTrigger("Special"); // 必殺技Animatorのトリガーを引く
+        }
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _specialRange, _enemyLayer);
         foreach (Collider2D _enemy in enemies)
