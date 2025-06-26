@@ -411,6 +411,24 @@ MonoBehaviour:
     SpawnInterval: 5
     MinSpawnCount: 4
     MaxSpawnCount: 5
+  - EnemyPrefabs:
+    - {fileID: 2100174126470413778, guid: 3488a6bfd1262124fb3716d4bb3f9dda, type: 3}
+    - {fileID: 1753864776727645195, guid: 1be0d5d593247b140ae830f55fd9a306, type: 3}
+    - {fileID: 3066595039487722012, guid: 29e3d26f080cedd43bff8f0e9adc47ab, type: 3}
+    BossPrefab: {fileID: 3898210656183116678, guid: 45c372fb646d7ce4aae5ddb4da93423a, type: 3}
+    SpawnBoss: 1
+    SpawnInterval: 5
+    MinSpawnCount: 3
+    MaxSpawnCount: 4
+  - EnemyPrefabs:
+    - {fileID: 2100174126470413778, guid: 3488a6bfd1262124fb3716d4bb3f9dda, type: 3}
+    - {fileID: 1753864776727645195, guid: 1be0d5d593247b140ae830f55fd9a306, type: 3}
+    - {fileID: 3066595039487722012, guid: 29e3d26f080cedd43bff8f0e9adc47ab, type: 3}
+    BossPrefab: {fileID: 3898210656183116678, guid: 45c372fb646d7ce4aae5ddb4da93423a, type: 3}
+    SpawnBoss: 1
+    SpawnInterval: 5
+    MinSpawnCount: 3
+    MaxSpawnCount: 4
   PhaseDuration: 10
   SpawnPoints:
   - {fileID: 690686042}
