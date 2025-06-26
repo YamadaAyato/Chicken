@@ -32,6 +32,10 @@ public class Enemy : MonoBehaviour
     [Header("スコア設定")]
     [SerializeField] public int _scoreValue = 5; //敵を倒した時に加算するスコア
 
+    [Header("効果音設定")]
+    [SerializeField] AudioClip _seClip;
+    private AudioSource _audioSource;
+
     private bool _isSlowed = false;　　//スロー状態の判定
     private bool _isGrounded = false;　//接地判定
 
@@ -40,6 +44,8 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
+
         _currentHp = _maxHp;  //現在のHpにmaxHpを代入
         _currentSpeed = _baseSpeed;  //現在のSpeedにmaxSpeedを代入
 
@@ -91,6 +97,13 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         _currentHp -= damage;
+
+        if (_audioSource != null && _seClip != null)
+        {
+            _audioSource.clip = _seClip;
+            _audioSource.Play(); 
+        }
+
         if (_currentHp <= 0)
         {
             Die();
