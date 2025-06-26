@@ -7,11 +7,15 @@ using UnityEngine.UI;
 public class ResultManager : MonoBehaviour
 {
     [SerializeField] Text[] _resultText;
+    [SerializeField] Text _yourScore;
     // Start is called before the first frame update
     void Start()
     {
         int _currentScore = ScoreManager.Instance._score;
         Debug.Log("現在のスコア: " + _currentScore);
+
+        // 「あなたのスコア」を表示
+        _yourScore.text = $"{_currentScore.ToString("D5")}";
 
         // _resultText[0].text = ScoreManager.Instance._score.ToString();
 
@@ -38,7 +42,7 @@ public class ResultManager : MonoBehaviour
         {
             if (i < scores.Count)
             {
-                _resultText[i].text = $"{i + 1}位 : {scores[i].ToString("D8")}";
+                _resultText[i].text = $"{i + 1}位 : {scores[i].ToString("D5")}";
             }
             else
             {
