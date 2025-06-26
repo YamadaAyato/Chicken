@@ -203,7 +203,7 @@ MonoBehaviour:
   _move: 1
   _jump: 0
   _attackHomeDamage: 1
-  _knockBackForce: 5
+  _knockBackForce: 20
   _scoreValue: 3
   _seClip: {fileID: 8300000, guid: 03a55d82df0d4eb428acb138f38800d7, type: 3}
 --- !u!50 &-8505016032803097376
