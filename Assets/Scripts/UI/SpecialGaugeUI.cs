@@ -14,8 +14,16 @@ public class SpecialGaugeUI : MonoBehaviour
     [Header("Ready表示用テキスト")]
     [SerializeField] private GameObject _readyText;
 
+    [Header("効果音")]
+    [SerializeField] private AudioClip _seClip;
+    private AudioSource _audioSource;
+
     private bool _wasReady = false;
 
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
     private void Update()
     {
         if (_player == null || _gaugeImage == null) return;  //nullチェック
@@ -48,6 +56,7 @@ public class SpecialGaugeUI : MonoBehaviour
         if (_readyText != null)
         {
             _readyText.SetActive(show);
+            _audioSource.PlayOneShot(_seClip);
         }
     }
 }

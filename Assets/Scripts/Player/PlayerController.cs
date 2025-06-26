@@ -25,7 +25,8 @@ public class PlayerController : MonoBehaviour
     private float _currentSpecialGauge = 0f;
 
     [Header("効果音関連")]
-    [SerializeField] private AudioClip _seClip;
+    [SerializeField] private AudioClip _stunClip;
+    [SerializeField] private AudioClip _specialClip;
     private AudioSource _audioSource;
 
 
@@ -153,7 +154,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayStunSE(float duration)
     {
-        _audioSource.clip = _seClip;
+        _audioSource.clip = _stunClip;
         _audioSource.Play();
         Invoke(nameof(StopSE), duration);
     }
@@ -169,6 +170,7 @@ public class PlayerController : MonoBehaviour
     private void UseSpecialSkill()
     {
         Debug.Log("ULT発動");
+        _audioSource.PlayOneShot(_specialClip);
 
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, _specialRange, _enemyLayer);
         foreach (Collider2D _enemy in enemies)

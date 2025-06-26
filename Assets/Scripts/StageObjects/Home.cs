@@ -10,7 +10,7 @@ public class Home : MonoBehaviour
     public static Home Instance { get; private set; }
 
     [Header("家のHP設定")]
-    [SerializeField] public int _homeMaxHp = 5;
+    [SerializeField] public int _homeMaxHp = 10;
     private int _homeCurrentHp;
 
     [Header("UI関連")]
@@ -18,7 +18,7 @@ public class Home : MonoBehaviour
 
     [Header("効果音")]
     [SerializeField] private AudioClip _seClip;
-    private AudioSource _audioSoirce;
+    private AudioSource _audioSource;
 
 
     void Awake()
@@ -36,7 +36,7 @@ public class Home : MonoBehaviour
 
     void Start()
     {
-        _audioSoirce = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
 
         _homeCurrentHp = _homeMaxHp;
         UpdateHpUI();   // 初期表示の更新
@@ -50,7 +50,7 @@ public class Home : MonoBehaviour
     {
         _homeCurrentHp -= damegeHome;
         _homeCurrentHp = Mathf.Clamp(_homeCurrentHp, 0, _homeMaxHp);
-        _audioSoirce.PlayOneShot(_seClip);
+        _audioSource.PlayOneShot(_seClip);
         UpdateHpUI();
 
         //HPが0以下になったらGameOver Sceneをロード
