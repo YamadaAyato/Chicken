@@ -16,9 +16,28 @@ public class Home : MonoBehaviour
     [Header("UI関連")]
     [SerializeField] private Image _hpFillImage;
 
+    [Header("効果音")]
+    [SerializeField] private AudioClip _seClip;
+    private AudioSource _audioSoirce;
+
+
+    void Awake()
+    {
+        // シングルトン設定
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
+        _audioSoirce = GetComponent<AudioSource>();
+
         _homeCurrentHp = _homeMaxHp;
         UpdateHpUI();   // 初期表示の更新
     }
@@ -31,6 +50,7 @@ public class Home : MonoBehaviour
     {
         _homeCurrentHp -= damegeHome;
         _homeCurrentHp = Mathf.Clamp(_homeCurrentHp, 0, _homeMaxHp);
+        _audioSoirce.PlayOneShot(_seClip);
         UpdateHpUI();
 
         //HPが0以下になったらGameOver Sceneをロード
@@ -45,6 +65,7 @@ public class Home : MonoBehaviour
     {
         if (_hpFillImage != null)
         {
+            Debug.Log("HPUIを更新");
             float fillAmount = (float)_homeCurrentHp / _homeMaxHp;
             _hpFillImage.fillAmount = fillAmount;
         }

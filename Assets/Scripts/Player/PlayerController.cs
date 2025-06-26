@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     [Header("移動設定")]
     [SerializeField] private float _moveSpeed = 10f;　//移動速度
     [SerializeField] private float _jumpforce = 10f;　//ジャンプ力
-    [SerializeField] private float _maxSpeed = 50f;　//速度上限
+    [SerializeField] private float _maxSpeed = 50f; //速度上限
+    bool _IsGrounded = false;
 
     [Header("卵設定")]
     [SerializeField] private float _eggDropForce = 10f; //卵を落とす力
@@ -21,18 +22,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _gaugePerEnemy = 20f;
     [SerializeField] private float _specialRange = 5f; // 範囲
     [SerializeField] private LayerMask _enemyLayer;
-
     private float _currentSpecialGauge = 0f;
 
-    private bool _IsStunned;  //スタンしているか
-    private float _stuntimer;  //スタン用の時間
+    [Header("効果音関連")]
+    [SerializeField] private AudioClip _seClip;
+    private AudioSource _audioSource;
+
+
+    private bool _isStunned;  //スタンしているか
+    private float _stunTimer;  //スタン用の時間
     private Rigidbody2D _rb;
-    bool _IsGrounded = false;
     float _timer = 0f;
     // Start is called before the first frame update
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -41,12 +46,12 @@ public class PlayerController : MonoBehaviour
         //時間計測
         _timer += Time.deltaTime;
 
-        if (_IsStunned)
+        if (_isStunned)
         {
-            _stuntimer -= Time.deltaTime;
-            if (_stuntimer <= 0)
+            _stunTimer -= Time.deltaTime;
+            if (_stunTimer <= 0)
             {
-                _IsStunned = false;
+                _isStunned = false;
                 Debug.Log("スタン解除");
             }
 
@@ -72,12 +77,12 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_IsStunned)
+        if (_isStunned)
         {
-            _stuntimer -= Time.deltaTime;
-            if (_stuntimer <= 0)
+            _stunTimer -= Time.deltaTime;
+            if (_stunTimer <= 0)
             {
-                _IsStunned = false;
+                _isStunned = false;
                 Debug.Log("スタン解除");
             }
 
@@ -137,12 +142,25 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// StunBirdで呼び出し、プレイヤーをスタンさせる
     /// </summary>
-    /// <param name="_duration"></param>
-    public void Stun(float _duration)
+    /// <param name="duration"></param>
+    public void Stun(float duration)
     {
-        _IsStunned = true;
-        _stuntimer = _duration;
-        Debug.Log($"スタン中{_duration}秒");
+        _isStunned = true;
+        _stunTimer = duration;
+        Debug.Log($"スタン中{duration}秒");
+        PlayStunSE(duration);
+    }
+
+    public void PlayStunSE(float duration)
+    {
+        _audioSource.clip = _seClip;
+        _audioSource.Play();
+        Invoke(nameof(StopSE), duration);
+    }
+
+    private void StopSE()
+    {
+        _audioSource.Stop();
     }
 
     /// <summary>
@@ -186,13 +204,13 @@ public class PlayerController : MonoBehaviour
     }
 
     //安全用
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Scaffold"))
-        {
-            _IsGrounded = true;
-        }
-    }
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Scaffold"))
+    //    {
+    //        _IsGrounded = true;
+    //    }
+    //}
 
     private void OnEnable()
     {
