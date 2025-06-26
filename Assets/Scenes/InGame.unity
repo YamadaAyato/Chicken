@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 339738608868591351, guid: ee30a2dbd1fe02544bfd50ff87515240, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -33
+      value: -27.9
       objectReference: {fileID: 0}
     - target: {fileID: 339738608868591351, guid: ee30a2dbd1fe02544bfd50ff87515240, type: 3}
       propertyPath: m_LocalPosition.y
@@ -189,6 +189,10 @@ PrefabInstance:
     - target: {fileID: 7051878324545008551, guid: ee30a2dbd1fe02544bfd50ff87515240, type: 3}
       propertyPath: m_Name
       value: CutIn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7051878324545008551, guid: ee30a2dbd1fe02544bfd50ff87515240, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
