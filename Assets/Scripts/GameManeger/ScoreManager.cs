@@ -2,54 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager Instance { get; private set; } //どこからでも呼べる
+    public static ScoreManager Instance { get; private set; }
 
     [Header("UIの参照")]
-    [SerializeField] private Text _scoreText; 
+    [SerializeField] private Text _scoreText;
 
     public int _score = 0;
 
-
     void Awake()
     {
-        //一つだけ存在させる処理
+        //シングルトン
         if (Instance == null)
         {
-            Instance = this;  // 自分自身を代入（最初の1個）
-            DontDestroyOnLoad(gameObject); 
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            // シーン変更時に UI を再接続
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
-            Destroy(gameObject);  // 2個目以降は削除（重複防止）
+            Destroy(gameObject);
         }
     }
 
-    void Start()
+    // シーンが読み込まれたときに呼ばれる
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //シーン開始時に探す
-        //設計的にはよくない
         _scoreText = GameObject.Find("ScoreText")?.GetComponent<Text>();
+
+        if (scene.name == "InGame") 
+        {
+            ResetScore();
+        }
+
         UpdateScoreText();
     }
 
-    /// <summary>
-    /// スコアを加算する処理
-    /// </summary>
-    /// <param name="amount">Enemy側から代入する値</param>
     public void AddScore(int amount)
     {
-        _score += amount;  //Enemy側から加算
+        _score += amount;
         Debug.Log("スコア加算");
         UpdateScoreText();
     }
 
-
-    /// <summary>
-    /// スコアを更新して表示する処理
-    /// </summary>
     private void UpdateScoreText()
     {
         if (_scoreText != null)
@@ -57,5 +57,11 @@ public class ScoreManager : MonoBehaviour
             _scoreText.text = "Score : " + _score.ToString();
             Debug.Log($"スコア+{_score}");
         }
+    }
+
+    public void ResetScore()
+    {
+        _score = 0;
+        UpdateScoreText();
     }
 }
