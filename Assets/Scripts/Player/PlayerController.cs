@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audioSource;
 
     [Header("アニメーション関連")]
+    [SerializeField] private GameObject _cutIn;
     [SerializeField] private Animator _specialEffectAnimator; //必殺技演出用のAnimator
 
     private bool _isStunned;  //スタンしているか
@@ -173,6 +174,8 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("ULT発動");
         _audioSource.PlayOneShot(_specialClip);
+
+        _cutIn.SetActive(true);
 
         if (_specialEffectAnimator != null)
         {
