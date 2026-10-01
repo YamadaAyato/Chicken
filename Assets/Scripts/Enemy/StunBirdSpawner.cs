@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class StunBirdSpawer : MonoBehaviour
 {
-    [Header("ƒXƒ|[ƒ“İ’è")]
-    [SerializeField] private StunBird _stunBirdPrefab;  //ƒXƒ|[ƒ“‚³‚¹‚é“G‚ÌƒvƒŒƒnƒu
-    [SerializeField] private Transform[] _spawnPoints;@@//oŒ»ˆÊ’u
+    [Header("ã‚¹ãƒãƒ¼ãƒ³è¨­å®š")]
+    [SerializeField] private StunBird _stunBirdPrefab;  //ã‚¹ãƒãƒ¼ãƒ³ã•ã›ã‚‹æ•µã®ãƒ—ãƒ¬ãƒãƒ–
+    [SerializeField] private Transform[] _spawnPoints;ã€€ã€€//å‡ºç¾ä½ç½®
 
-    [Header("ƒXƒ|[ƒ“‚ÌŠÔŠu")]
-    [SerializeField] private float _minInterval = 1f;  //oŒ»‚ÌÅ¬ŠÔŠu
-    [SerializeField] private float _maxInterval = 5f;  //oŒ»‚ÌÅ‘åŠÔŠu
+    [Header("ã‚¹ãƒãƒ¼ãƒ³ã®é–“éš”")]
+    [SerializeField] private float _minInterval = 1f;  //å‡ºç¾ã®æœ€å°é–“éš”
+    [SerializeField] private float _maxInterval = 5f;  //å‡ºç¾ã®æœ€å¤§é–“éš”
     private float _spawntimer;
 
     void Start()
     {
-        //_spawntimer‚ÉƒXƒ|[ƒ“ŠÔŠu‚Ì’l‚©‚çƒ‰ƒ“ƒ_ƒ€‚É”‚ğæ‚èo‚µ‘ã“ü
+        //_spawntimerã«ã‚¹ãƒãƒ¼ãƒ³é–“éš”ã®å€¤ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«æ•°ã‚’å–ã‚Šå‡ºã—ä»£å…¥
         _spawntimer = Random.Range(_minInterval, _maxInterval);
     }
 
@@ -23,8 +23,8 @@ public class NewBehaviourScript : MonoBehaviour
     {
         _spawntimer -= Time.deltaTime;
 
-        //ƒXƒ|[ƒ“ƒ^ƒCƒ}[‚ª0ˆÈ‰º‚Ì
-        if (_spawntimer <= 0@&& _stunBirdPrefab)
+        //ã‚¹ãƒãƒ¼ãƒ³ã‚¿ã‚¤ãƒãƒ¼ãŒ0ä»¥ä¸‹ã®æ™‚
+        if (_spawntimer <= 0ã€€&& _stunBirdPrefab)
         {
             Spawn();
             _spawntimer = Random.Range(_minInterval, _maxInterval);
@@ -33,11 +33,11 @@ public class NewBehaviourScript : MonoBehaviour
 
     void Spawn()
     {
-        //”z—ñ‚Ì—v‘f”‚©‚çƒ‰ƒ“ƒ_ƒ€‚É”‚ğo‚µA‚»‚Ì”‚Ìƒ|ƒCƒ“ƒg‚ğ‘ã“ü
+        //é…åˆ—ã®è¦ç´ æ•°ã‹ã‚‰ãƒ©ãƒ³ãƒ€ãƒ ã«æ•°ã‚’å‡ºã—ã€ãã®æ•°ã®ãƒã‚¤ãƒ³ãƒˆã‚’ä»£å…¥
         int index = Random.Range(0, _spawnPoints.Length);
         Transform _spawnPoint = _spawnPoints[index];
 
-        //ƒXƒ|[ƒ“ƒ|ƒCƒ“ƒg‚É“G‚ğ¢Š«
+        //ã‚¹ãƒãƒ¼ãƒ³ãƒã‚¤ãƒ³ãƒˆã«æ•µã‚’å¬å–š
         StunBird enemy = Instantiate(_stunBirdPrefab, _spawnPoint.position, Quaternion.identity);
     }
 }

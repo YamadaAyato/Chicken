@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,41 +12,41 @@ public class ResultManager : MonoBehaviour
     void Start()
     {
         int _currentScore = ScoreManager.Instance._score;
-        Debug.Log("Œ»İ‚ÌƒXƒRƒA: " + _currentScore);
+        Debug.Log("ç¾åœ¨ã®ã‚¹ã‚³ã‚¢: " + _currentScore);
 
-        // u‚ ‚È‚½‚ÌƒXƒRƒAv‚ğ•\¦
+        // ã€Œã‚ãªãŸã®ã‚¹ã‚³ã‚¢ã€ã‚’è¡¨ç¤º
         _yourScore.text = $"{_currentScore.ToString("D5")}";
 
         // _resultText[0].text = ScoreManager.Instance._score.ToString();
 
         List<int> scores = LoadScores();
 
-        // 0“_‚ğœŠO‚µ‚Ä‚©‚ç’Ç‰Ái‰Šúó‘Ô‚Å‚à‡ˆÊ‚¨‚©‚µ‚­‚È‚ç‚È‚¢j
+        // 0ç‚¹ã‚’é™¤å¤–ã—ã¦ã‹ã‚‰è¿½åŠ ï¼ˆï¼åˆæœŸçŠ¶æ…‹ã§ã‚‚é †ä½ãŠã‹ã—ããªã‚‰ãªã„ï¼‰
        // scores = scores.Where(s => s > 0).ToList();
        // scores.Add(_currentScore);
 
-        // V‚µ‚¢ƒXƒRƒA‚ğ’Ç‰Á
+        // æ–°ã—ã„ã‚¹ã‚³ã‚¢ã‚’è¿½åŠ 
         scores.Add(_currentScore);
 
-        // ƒXƒRƒA‚ğ~‡‚Åƒ\[ƒgi‚‚¢‡j
+        // ã‚¹ã‚³ã‚¢ã‚’é™é †ã§ã‚½ãƒ¼ãƒˆï¼ˆé«˜ã„é †ï¼‰
         scores = scores.OrderByDescending(s => s).ToList();
 
-        // ãˆÊ5Œ‚¾‚¯•Û‘¶
+        // ä¸Šä½5ä»¶ã ã‘ä¿å­˜
         scores = scores.Take(5).ToList();
 
-        // •Û‘¶
+        // ä¿å­˜
         SaveScores(scores);
 
-        // •\¦
+        // è¡¨ç¤º
         for (int i = 0; i < _resultText.Length; i++)
         {
             if (i < scores.Count)
             {
-                _resultText[i].text = $"{i + 1}ˆÊ : {scores[i].ToString("D5")}";
+                _resultText[i].text = $"{i + 1}ä½ : {scores[i].ToString("D5")}";
             }
             else
             {
-                _resultText[i].text = $"{i + 1}ˆÊ : --------";
+                _resultText[i].text = $"{i + 1}ä½ : --------";
             }
         }
 

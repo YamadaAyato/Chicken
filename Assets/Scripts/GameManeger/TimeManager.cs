@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -34,13 +34,13 @@ public class TimeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// ŠÔ‚ğXV‚µ‚Ä•\¦‚·‚éˆ—
+    /// æ™‚é–“ã‚’æ›´æ–°ã—ã¦è¡¨ç¤ºã™ã‚‹å‡¦ç†
     /// </summary>
     private void UpdateTimerDisplay()
     {
-        //ŠÔ‚ªƒ}ƒCƒiƒX‚É‚È‚Á‚½‚Æ‚«‚É0ˆÈ‰º‚É‚µ‚È‚¢‚½‚ß‚ÌˆÀ‘Sˆ—
+        //æ™‚é–“ãŒãƒã‚¤ãƒŠã‚¹ã«ãªã£ãŸã¨ãã«0ä»¥ä¸‹ã«ã—ãªã„ãŸã‚ã®å®‰å…¨å‡¦ç†
         float timeToShow = Mathf.Max(_currentTime, 0f);
-        //FloorToInt‚ÍA¬”“_ˆÈ‰º‚ğØ‚èÌ‚Ä
+        //FloorToIntã¯ã€å°æ•°ç‚¹ä»¥ä¸‹ã‚’åˆ‡ã‚Šæ¨ã¦
         int minutes = Mathf.FloorToInt(timeToShow / 60);  
         int seconds = Mathf.FloorToInt(timeToShow % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);

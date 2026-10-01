@@ -1,20 +1,20 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SpecialGaugeUI : MonoBehaviour
 {
-    [Header("ƒQ[ƒW‰æ‘œ")]
+    [Header("ã‚²ãƒ¼ã‚¸ç”»åƒ")]
     [SerializeField] private Image _gaugeImage;
 
-    [Header("ƒvƒŒƒCƒ„[")]
+    [Header("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼")]
     [SerializeField] private PlayerController _player;
 
-    [Header("Ready•\Ž¦—pƒeƒLƒXƒg")]
+    [Header("Readyè¡¨ç¤ºç”¨ãƒ†ã‚­ã‚¹ãƒˆ")]
     [SerializeField] private GameObject _readyText;
 
-    [Header("Œø‰Ê‰¹")]
+    [Header("åŠ¹æžœéŸ³")]
     [SerializeField] private AudioClip _seClip;
     private AudioSource _audioSource;
 
@@ -26,13 +26,13 @@ public class SpecialGaugeUI : MonoBehaviour
     }
     private void Update()
     {
-        if (_player == null || _gaugeImage == null) return;  //nullƒ`ƒFƒbƒN
+        if (_player == null || _gaugeImage == null) return;  //nullãƒã‚§ãƒƒã‚¯
 
-        //ƒQ[ƒW‚ÌXV
+        //ã‚²ãƒ¼ã‚¸ã®æ›´æ–°
         float ratio = _player.CurrentGaugeRatio;
         _gaugeImage.fillAmount = ratio;
 
-        // Ready•\Ž¦‚ÌŠÇ—
+        // Readyè¡¨ç¤ºã®ç®¡ç†
         if (ratio >= 1f)
         {
             if (!_wasReady)

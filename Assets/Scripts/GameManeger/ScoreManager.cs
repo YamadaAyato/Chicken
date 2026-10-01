@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,20 +8,20 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance { get; private set; }
 
-    [Header("UI‚ÌQÆ")]
+    [Header("UIã®å‚ç…§")]
     [SerializeField] private Text _scoreText;
 
     public int _score = 0;
 
     void Awake()
     {
-        //ƒVƒ“ƒOƒ‹ƒgƒ“
+        //ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // ƒV[ƒ“•ÏX‚É UI ‚ğÄÚ‘±
+            // ã‚·ãƒ¼ãƒ³å¤‰æ›´æ™‚ã« UI ã‚’å†æ¥ç¶š
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    // ƒV[ƒ“‚ª“Ç‚İ‚Ü‚ê‚½‚Æ‚«‚ÉŒÄ‚Î‚ê‚é
+    // ã‚·ãƒ¼ãƒ³ãŒèª­ã¿è¾¼ã¾ã‚ŒãŸã¨ãã«å‘¼ã°ã‚Œã‚‹
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _scoreText = GameObject.Find("ScoreText")?.GetComponent<Text>();
@@ -46,7 +46,7 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         _score += amount;
-        Debug.Log("ƒXƒRƒA‰ÁZ");
+        Debug.Log("ã‚¹ã‚³ã‚¢åŠ ç®—");
         UpdateScoreText();
     }
 
@@ -55,7 +55,7 @@ public class ScoreManager : MonoBehaviour
         if (_scoreText != null)
         {
             _scoreText.text = "Score : " + _score.ToString();
-            Debug.Log($"ƒXƒRƒA+{_score}");
+            Debug.Log($"ã‚¹ã‚³ã‚¢+{_score}");
         }
     }
 
