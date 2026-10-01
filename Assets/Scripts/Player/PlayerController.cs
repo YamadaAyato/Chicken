@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("移動設定")]
     [SerializeField] private float _moveSpeed = 10f;　//移動速度
-    [SerializeField] private float _jumpforce = 10f;　//ジャンプ力
+    [SerializeField] private float _jumpForce = 10f;　//ジャンプ力
     [SerializeField] private float _maxSpeed = 50f; //速度上限
-    bool _IsGrounded = false;
+    bool _isGrounded = false;
 
     [Header("卵設定")]
     [SerializeField] private float _eggDropForce = 10f; //卵を落とす力
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //IsGroundedがtrueの時とshiftが押されたときジャンプメソッドを実行
-        if (_IsGrounded && Input.GetButtonDown("Jump"))
+        if (_isGrounded && Input.GetButtonDown("Jump"))
         {
             Jump();
         }
@@ -119,9 +119,9 @@ public class PlayerController : MonoBehaviour
     {
         if (_rb != null)
         {
-            _rb.AddForce(Vector2.up * _jumpforce, ForceMode2D.Impulse);
+            _rb.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
             //設置判定の変数をfalseに
-            _IsGrounded = false;
+            _isGrounded = false;
         }
     }
 
@@ -211,18 +211,9 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Scaffold"))
         {
             Debug.Log("地面にあたっています");
-            _IsGrounded = true;
+            _isGrounded = true;
         }
     }
-
-    //安全用
-    //private void OnCollisionStay2D(Collision2D collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Scaffold"))
-    //    {
-    //        _IsGrounded = true;
-    //    }
-    //}
 
     private void OnEnable()
     {

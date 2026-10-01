@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +10,7 @@ public class HowToUIManager : MonoBehaviour
     public void ToggleHowToPanel()
     {
         bool isActive = _howToPanel.activeSelf;
-        _howToPanel.SetActive(!isActive); // •\¦E”ñ•\¦‚ğØ‚è‘Ö‚¦
+        _howToPanel.SetActive(!isActive); // è¡¨ç¤ºãƒ»éè¡¨ç¤ºã‚’åˆ‡ã‚Šæ›¿ãˆ
     }
 
     public void CloseHowToPanel()

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Retry : MonoBehaviour
 {
     /// <summary>
-    /// ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚çƒ^ƒCƒgƒ‹‰æ–Ê‚É–ß‚é
+    /// ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚‰ã‚¿ã‚¤ãƒˆãƒ«ç”»é¢ã«æˆ»ã‚‹
     /// </summary>
     public void OnClick()
     {

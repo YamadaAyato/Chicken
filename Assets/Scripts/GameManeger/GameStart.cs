@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +7,7 @@ public class GameStart : MonoBehaviour
 {
 
     /// <summary>
-    /// ƒNƒŠƒbƒN‚³‚ê‚½‚çInGame Scene‚ğƒ[ƒh
+    /// ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰InGame Sceneã‚’ãƒ­ãƒ¼ãƒ‰
     /// </summary>
     public void OnClick()
     {
